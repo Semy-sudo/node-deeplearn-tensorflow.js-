@@ -55,30 +55,77 @@
         imgAry = [];
 
         btnBoard.innerHTML = '';
-        numClass = prompt('Number of Class :');
+        //numClass = prompt('Number of Class :');
+        numClass = 4;
+        const className = new Array("Bengal","Boombey","Russianblue","ragdoll");
+      
         for (let i = 0; i < numClass; i++) {
-            const className = prompt('Class ' + i + "'s Label :");
-            label.push(className);
+            //const className = prompt('Class ' + i + "'s Label :");
+            label.push(className[i]);
+            console.log(className[i]);
             const btn = document.createElement('button');
-            btn.innerText = className;
+            btn.innerText = className[i];
+
+/*
+            //각 라벨의 버튼 클릭시 이미지 파일 넣을 수 있음
             btn.addEventListener('click', () => {
                 const input = document.createElement('input');
                 input.type = 'file';
                 input.multiple = 'multiple';
+                //onchange 변화 탐지해줌->디렉터리에서 파일을 불러오는 방식으로 변경
                 input.onchange = evt => {
-                    console.log(`Added ${evt.target.files.length} ${className} images.`);
+                    console.log(`Added ${evt.target.files.length} ${className[i]} images.`);
                     for (let f of evt.target.files) {
-                        const url = URL.createObjectURL(f);
-                        const img = new Image();
-                        img.id = className;
+                        const url = URL.createObjectURL(f);//이미지 파일 경로
+                        const img = new Image();//이미지 객체의 로드 방식
+                        img.id = className[i];//("russianblue","bengal","boombey","ragdoll");
                         img.onload = () => {
                             imgAry.push(img);
                         }
                         img.src = url;
+                       
                     }
                 }
                 input.click();
             });
+
+
+*/
+
+         
+
+            var files = "./dataset/";
+        
+            
+            //for (let f of files) {
+                for(j=0;j<10;j++){
+                        const url =  files+className[i]+"/"+j+".jpg";//이미지 파일 경로
+                        const img = new Image();//이미지 객체의 로드 방식
+                        img.id = className[i];//("russianblue","bengal","boombey","ragdoll");
+                        img.onload = () => {
+                            imgAry.push(img);
+                        }
+                        img.src = url;
+                        console.log(url);
+                }
+                    
+            //}
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
             if (i % 4 == 0) {
                 btnBoard.appendChild(document.createElement('br'));
                 btnBoard.appendChild(btn);
